@@ -6,24 +6,36 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'restaurant-create' %}">Create Restaurant</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'signup' %}">Signup</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'signin' %}">Signin</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'signout' %}">Signout</a>
-      </li>
+      {% if request.user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link" href="#">{{request.user}}</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'restaurant-create' %}">Create Restaurant</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'signout' %}">Signout</a>
+          </li>
+      {% else %}
+
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'signup' %}">Signup</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'signin' %}">Signin</a>
+          </li>
+
+      {% endif %}
+
     </ul>
-    
+
     <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="text" name='q' placeholder="I don't do anything">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
-    
+
   </div>
 </nav>
